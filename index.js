@@ -43,7 +43,7 @@ app.post("/chats",(req,res) =>{
         created_at: new Date()
     });
    newchat.save().then((res) =>{
-    console.log("done here");
+    console.log(res);
    }).catch((err) => {
     console.log(err);
    });
@@ -66,6 +66,14 @@ app.put("/chats/:id",async (req,res) => {
 
     res.redirect("/chats");
 
+});
+
+// Destroy route
+app.delete("/chats/:id", async(req,res)=>{
+    let {id} = req.params;
+    let deletedchat = await chat.findByIdAndDelete(id);
+    console.log(deletedchat);
+    res.redirect("/chats");
 });
 
 app.get("/", (req,res)=>{
